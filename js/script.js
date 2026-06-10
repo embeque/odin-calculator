@@ -22,9 +22,9 @@ function div(a, b=1){
 
 function operate(op, a, b){
     // call one of the above functions
-    a = parseInt(a);
+    a = parseFloat(a);
     // console.log(a);
-    b = parseInt(b);
+    b = parseFloat(b);
     if (op == '+') return add(a, b || undefined);
     else if (op == '-') return sub(a, b);
     else if (op == '*') return mul(a, b);
@@ -35,7 +35,12 @@ function operate(op, a, b){
 const buttonContainer = document.querySelector('#buttons');
 const valueDisplay = document.querySelector('#main');
 buttonContainer.addEventListener('click', (e)=>{
-    if (e.target.classList.contains('digits')){
+    if (e.target.id == '.'){
+        if(valueDisplay.textContent.indexOf('.') == -1){
+            // pressDot = true;
+            valueDisplay.textContent += '.';
+        }
+    } else if (e.target.classList.contains('digits')){
         // Normal behaviour
         if (pressEqual != undefined){
             valueDisplay.textContent = '';
@@ -87,7 +92,10 @@ buttonContainer.addEventListener('click', (e)=>{
     }
 });
 
-
+const backbutton = document.querySelector('#back');
+backbutton.addEventListener('click', (e)=>{
+    valueDisplay.textContent = valueDisplay.textContent.slice(0, -1);
+});
 
 
 
